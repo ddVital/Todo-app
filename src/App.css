@@ -26,6 +26,12 @@ form {
   align-items: center;
 }
 
+.add-new {
+  margin: auto;
+  text-align: center;
+  width: 50%;
+}
+
 form input,
 form button {
   padding: 0.5rem;
@@ -46,10 +52,6 @@ form button:hover {
   color: white;
 }
 
-.todo-container {
-  
-}
-
 .todo {
   background-color: #fff;
   margin: 1rem auto;
@@ -62,7 +64,7 @@ form button:hover {
 }
 
 .todo li {
-  font-size: 1.1rem;
+  font-size: 1rem;
   width: 95%;
 }
 
@@ -95,7 +97,7 @@ select {
 
 /* Custom Select */
 .select {
-  margin: .8rem;
+  margin: .5rem;
   position: relative;
   overflow: hidden;
 }
@@ -104,7 +106,7 @@ select {
   color: #ff6f47;
   font-family: "Poppins", sans-serif;
   cursor: pointer;
-  width: 15rem;
+  width: 10rem;
 }
 
 .filter-todo {
@@ -121,4 +123,41 @@ select {
   background: #ff6f47;
   cursor: pointer;
   pointer-events: none;
+}
+
+@media only screen and (max-width: 600px) {
+  header {font-size: 3rem;}
+
+  header,
+  form {
+    min-height: 20vh;
+    
+  }
+
+  .add-new {
+    margin: auto;
+    width: 80%;
+  }
+
+  form input {width: 10rem;}
+
+  form input,
+  form button {
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
+  
+  .todo {width: 80%;}
+  
+  /*CUSTOM SELECTOR */
+  select {
+    width: 9rem;
+    background-color: #fff;
+  }
+  
+  .filter-todo {padding: .5rem;}
+
+  /* Arrow */
+  .select::after {padding: .5rem;}
+
 }

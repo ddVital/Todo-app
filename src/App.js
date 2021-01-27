@@ -53,7 +53,9 @@ function App() {
       <header className="App-header">
         Todo App
       </header>
-      <Form todos={todos} setTodos={setTodos} inputText={inputText} setInputText={setInputText} setStatus={setStatus} />
+      <div className="add-new">
+        <Form todos={todos} setTodos={setTodos} inputText={inputText} setInputText={setInputText} setStatus={setStatus} />
+      </div>
       <TodoList todos={filteredTodos} setTodos={setTodos} />
     </div>
   );
