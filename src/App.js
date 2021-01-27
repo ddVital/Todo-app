@@ -51,7 +51,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {inputText}
+        Todo App
       </header>
       <Form todos={todos} setTodos={setTodos} inputText={inputText} setInputText={setInputText} setStatus={setStatus} />
       <TodoList todos={filteredTodos} setTodos={setTodos} />

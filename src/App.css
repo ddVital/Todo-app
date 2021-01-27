@@ -1,7 +1,124 @@
 body {
-  font-family: 'Poppins', sans-serif;
+  background-image: linear-gradient(120deg, #FFB661 0%, #ffa175 50%, #FF6B4A 100%);
+  color: white;
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(107.56deg, #FFB661 0%, , #FF8515 100%);
+
 }
 
 .App {
   text-align: center;
+}
+
+button,
+input {outline: none;}
+
+header {
+  font-size: 2rem;
+}
+
+header,
+form {
+  min-height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form input,
+form button {
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  border: none;
+  background: white;
+}
+
+form button {
+  color: #ff6f47;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+form button:hover {
+  background: #ff6f47;
+  color: white;
+}
+
+.todo-container {
+  
+}
+
+.todo {
+  background-color: #fff;
+  margin: 1rem auto;
+  text-align: left;
+  list-style: none;
+  color: black;
+  padding: .5rem;
+  display: flex;
+  width: 45%;
+}
+
+.todo li {
+  font-size: 1.1rem;
+  width: 95%;
+}
+
+.complete-bnt,
+.trash-bnt {
+  font-size: 1.1rem;
+  background: none;
+  border: none;
+}
+
+.fa-check:hover {color: #00d600;}
+.fa-trash:hover {color: #ff0000;}
+
+.completed {
+  text-decoration: line-through;
+  color: #a5a5a5;
+}
+
+/*CUSTOM SELECTOR */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background-image: none;
+}
+
+/* Custom Select */
+.select {
+  margin: .8rem;
+  position: relative;
+  overflow: hidden;
+}
+
+select {
+  color: #ff6f47;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  width: 15rem;
+}
+
+.filter-todo {
+  padding: .8rem;
+}
+
+/* Arrow */
+.select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: .8rem;
+  background: #ff6f47;
+  cursor: pointer;
+  pointer-events: none;
 }
