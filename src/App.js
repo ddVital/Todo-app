@@ -56,7 +56,7 @@ function App() {
       <div className="add-new">
         <Form todos={todos} setTodos={setTodos} inputText={inputText} setInputText={setInputText} setStatus={setStatus} />
       </div>
-      <TodoList todos={filteredTodos} setTodos={setTodos} />
+      <TodoList todos={filteredTodos} setTodos={setTodos} saveLocalTodos={saveLocalTodos} />
     </div>
   );
 }

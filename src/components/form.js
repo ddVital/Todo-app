@@ -1,20 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Form = ({ inputText, setInputText, todos, setTodos, setStatus }) => {
+
+  const [id, setId] = useState(0);
 
   const inputTextHandler = (e) => {
     setInputText(e.target.value)
   }
 
+  useEffect(() => {
+    idProvider()
+  }, [todos])
+
+  const idProvider = () => {
+    setId(id + 1);
+  }
+
+  const getCurrentTime = () => {
+    const date = new Date();
+    const createdDate = date.toUTCString();
+    return createdDate;
+  }
+
   const submitTodoHandler = (e) => {
     e.preventDefault();
     if (inputText.length <= 0) {
-      alert("Please write something to add...")
+      alert("Please write something to add...");
     } else if (inputText.length > 50) {
-      alert("Max length is 50")
+      alert("Max length is 50");
     } else {
       setTodos([
-        ...todos, {task: inputText, completed: false, id: Math.random() * 1000}
+        ...todos, {task: inputText, completed: false, createdDate: getCurrentTime() , id: id.toString()},
       ]);
     }
     setInputText("");

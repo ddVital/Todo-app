@@ -20,8 +20,12 @@ const Todo = ({ todos, todo, setTodos }) => {
   return (
     <div className="todo" >
       <li className={`todo-item ${todo.completed ? "completed" : ""}`}>{ todo.task }</li>
+      <p>{todo.createdDate}</p>
       <button className="complete-bnt" onClick={completeHandler}>
         <i className="fas fa-check"></i>
+      </button>
+      <button className="edit-bnt">
+        <i className="fas fa-pen"></i>
       </button>
       <button className="trash-bnt" onClick={deleteHandler}>
         <i className="fas fa-trash"></i>
