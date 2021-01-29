@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 // importing components
 import Todo from './Todo';
@@ -20,25 +20,25 @@ const TodoList = ({ todos, setTodos }) => {
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId="todos">
           {(provided) => (
-                <ul className="characters" {...provided.droppableProps} ref={provided.innerRef}>
+                <div className="todos" {...provided.droppableProps} ref={provided.innerRef}>
                   {todos.map((todo, index) => {
                     return (
                       <Draggable key={todo.id} draggableId={todo.id} index={index}>
                         {(provided) => (
-                          <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                          <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                             <Todo 
                               key={todo.id}
                               setTodos={setTodos}
                               todos={todos}
                               todo={todo}
                             />
-                          </li>
+                          </div>
                         )}
                      </Draggable>
                     );
                   })}
                 {provided.placeholder}
-              </ul>
+              </div>
             )}
         </Droppable>
       </DragDropContext>

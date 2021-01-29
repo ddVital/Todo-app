@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Edit from './Edit';
 
 const Todo = ({ todos, todo, setTodos }) => {
+
+  const [edit, setEdit] = useState(false);
+  const [editInput, setEditInput] = useState(todo.task ? todo.task : ''); // the edited content
+
   const deleteHandler = () => {
     setTodos(todos.filter((el) => el.id !== todo.id ))
   }
@@ -17,19 +22,33 @@ const Todo = ({ todos, todo, setTodos }) => {
     );
   }
 
+  const editTodo = () => {
+    setEdit(true)
+  }
+
   return (
     <div className="todo" >
-      <li className={`todo-item ${todo.completed ? "completed" : ""}`}>{ todo.task }</li>
-      <p>{todo.createdDate}</p>
-      <button className="complete-bnt" onClick={completeHandler}>
-        <i className="fas fa-check"></i>
-      </button>
-      <button className="edit-bnt">
-        <i className="fas fa-pen"></i>
-      </button>
-      <button className="trash-bnt" onClick={deleteHandler}>
-        <i className="fas fa-trash"></i>
-      </button>
+      <div className='info'>
+        {
+          edit
+          ?
+          <Edit todo={todo} setEdit={setEdit} editInput={editInput} setEditInput={setEditInput} todos={todos} />
+          :
+          <p className={`task ${todo.completed ? "completed" : ""}`}>{ todo.task }</p>
+        }
+        <p className="created-date">{todo.createdDate}</p>
+      </div>
+      <div className="task-options">
+        <button className="complete-bnt" onClick={completeHandler}>
+          <i className="fas fa-check"></i>
+        </button>
+        <button className="edit-bnt" onClick={editTodo}>
+          <i className="fas fa-pen"></i>
+        </button>
+        <button className="trash-bnt" onClick={deleteHandler}>
+          <i className="fas fa-trash"></i>
+        </button>
+      </div>
     </div>    
   );
 }

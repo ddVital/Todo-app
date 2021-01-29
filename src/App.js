@@ -53,7 +53,7 @@ function App() {
       <header className="App-header">
         Todo App
       </header>
-      <div className="add-new">
+      <div className="">
         <Form todos={todos} setTodos={setTodos} inputText={inputText} setInputText={setInputText} setStatus={setStatus} />
       </div>
       <TodoList todos={filteredTodos} setTodos={setTodos} saveLocalTodos={saveLocalTodos} />

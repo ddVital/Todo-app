@@ -8,12 +8,9 @@ const Form = ({ inputText, setInputText, todos, setTodos, setStatus }) => {
     setInputText(e.target.value)
   }
 
-  useEffect(() => {
-    idProvider()
-  }, [todos])
-
+  // increase the id count
   const idProvider = () => {
-    setId(id + 1);
+    setId(Math.floor(Math.random() * 10000));
   }
 
   const getCurrentTime = () => {
@@ -23,6 +20,8 @@ const Form = ({ inputText, setInputText, todos, setTodos, setStatus }) => {
   }
 
   const submitTodoHandler = (e) => {
+    idProvider()
+
     e.preventDefault();
     if (inputText.length <= 0) {
       alert("Please write something to add...");
@@ -42,11 +41,12 @@ const Form = ({ inputText, setInputText, todos, setTodos, setStatus }) => {
 
   return (
     <form>
-      <input type="text" placeholder="Add task" value={inputText} onChange={inputTextHandler} />
-      <button type="submit" className="" onClick={submitTodoHandler} >
-        <i className="fas fa-plus-square"></i>
+      <input type="text" className="task-input" placeholder="Add task" value={inputText} onChange={inputTextHandler} />
+      <button type="submit" className="submit-bnt" onClick={submitTodoHandler} >
+        <i className="fas fa-plus-circle"></i>
       </button>
-      <div className="select">
+
+      <div className="filter">
         <select name="todos" className="filter-todo" onChange={statusHandler}>
           <option value="all">All</option>
           <option value="completed">Completed</option>

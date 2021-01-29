@@ -1,81 +1,110 @@
+* {outline: none;}
+
 body {
-  background-image: linear-gradient(120deg, #FFB661 0%, #ffa175 50%, #FF6B4A 100%);
+  background-image: linear-gradient(120deg, #614385 0%, #516395 100%);
   color: white;
   font-family: "Poppins", sans-serif;
   min-height: 100vh;
-  background: linear-gradient(107.56deg, #FFB661 0%, , #FF8515 100%);
-
 }
 
-.App {
-  text-align: center;
-}
-
-button,
-input {outline: none;}
+.App {text-align: center;}
 
 header {
-  font-size: 2rem;
-}
-
-header,
-form {
-  min-height: 20vh;
+  font-size: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.add-new {
-  margin: auto;
-  text-align: center;
-  width: 50%;
+header,
+form {
+  min-height: 15vh;
 }
 
-form input,
-form button {
-  padding: 0.5rem;
-  font-size: 1.5rem;
+form {
+  margin: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.task-input,
+.submit-bnt {
+  border-radius: 50px;
+  padding: 0.7rem;
+  font-size: 1.2rem;
   border: none;
-  background: white;
 }
 
-form button {
-  color: #ff6f47;
-  background: #fff;
+.task-input {width: 35%;}
+
+.submit-bnt {
+  background: none;
+  margin-left: -41px;
+  color: #614385;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-form button:hover {
-  background: #ff6f47;
+.submit-bnt:hover {
+  background: #614385;
   color: white;
 }
 
+select {
+  background-color: white;
+  border-radius: 50px;
+  border: none;
+  color: #516395;
+}
+
+.filter {
+  margin: .5rem;  
+}
+
+.filter-todo {padding: .8rem;}
+
+.todos {margin: auto;}
+
 .todo {
   background-color: #fff;
+  color: black;
   margin: 1rem auto;
   text-align: left;
   list-style: none;
-  color: black;
   padding: .5rem;
-  display: flex;
   width: 45%;
+  border-radius: 8px;
 }
 
-.todo li {
-  font-size: 1rem;
-  width: 95%;
+.info {
+  display: inline-block;
+  width: 80%;
 }
+
+.todo p {margin: 0px;}
+
+.task {width: 80%;}
+
+.created-date {
+  color: gray;
+  font-size: .7rem;
+  width: 80%;
+}
+
+.task-options {float: right;}
 
 .complete-bnt,
+.edit-bnt,
 .trash-bnt {
   font-size: 1.1rem;
   background: none;
   border: none;
 }
 
+.fas:hover {transition: all .6s ease;}
 .fa-check:hover {color: #00d600;}
+.fa-pen:hover {color: #614385;}
 .fa-trash:hover {color: #ff0000;}
 
 .completed {
@@ -83,81 +112,12 @@ form button:hover {
   color: #a5a5a5;
 }
 
-/*CUSTOM SELECTOR */
-select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  outline: 0;
-  box-shadow: none;
-  border: 0 !important;
-  background-image: none;
-}
-
-/* Custom Select */
-.select {
-  margin: .5rem;
-  position: relative;
-  overflow: hidden;
-}
-
-select {
-  color: #ff6f47;
-  font-family: "Poppins", sans-serif;
-  cursor: pointer;
-  width: 10rem;
-}
-
-.filter-todo {
-  padding: .8rem;
-}
-
-/* Arrow */
-.select::after {
-  content: "\25BC";
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: .8rem;
-  background: #ff6f47;
-  cursor: pointer;
-  pointer-events: none;
-}
-
 @media only screen and (max-width: 600px) {
-  header {font-size: 3rem;}
+  .task-input {width: 90%;}
 
-  header,
-  form {
-    min-height: 20vh;
-    
-  }
+  .todo {width: 90%;}
 
-  .add-new {
-    margin: auto;
-    width: 80%;
-  }
-
-  form input {width: 10rem;}
-
-  form input,
-  form button {
-    padding: 0.5rem;
-    font-size: 1rem;
-  }
+  .info {width: 70%;}
   
-  .todo {width: 80%;}
-  
-  /*CUSTOM SELECTOR */
-  select {
-    width: 9rem;
-    background-color: #fff;
-  }
-  
-  .filter-todo {padding: .5rem;}
-
-  /* Arrow */
-  .select::after {padding: .5rem;}
-
+  .created-date {font-size: .7rem;}
 }
