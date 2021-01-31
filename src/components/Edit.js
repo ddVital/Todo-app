@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Edit = ({ todo, setEdit, setEditInput, editInput }) => {
+const Edit = ({ todo, setEdit, editInput, setEditInput }) => {
 
   const inputTextHandler = (e) => {
     setEditInput(e.target.value);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 const Form = ({ inputText, setInputText, todos, setTodos, setStatus }) => {
 
@@ -8,7 +8,7 @@ const Form = ({ inputText, setInputText, todos, setTodos, setStatus }) => {
     setInputText(e.target.value)
   }
 
-  // increase the id count
+  // give id
   const idProvider = () => {
     setId(Math.floor(Math.random() * 10000));
   }

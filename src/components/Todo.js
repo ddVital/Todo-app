@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+
+// components
 import Edit from './Edit';
 
 const Todo = ({ todos, todo, setTodos }) => {
@@ -22,8 +24,9 @@ const Todo = ({ todos, todo, setTodos }) => {
     );
   }
 
+  // show the edit component
   const editTodo = () => {
-    setEdit(true)
+    setEdit(true); 
   }
 
   return (
@@ -33,7 +36,7 @@ const Todo = ({ todos, todo, setTodos }) => {
         {
           edit
           ?
-          <Edit todo={todo} setEdit={setEdit} editInput={editInput} setEditInput={setEditInput} todos={todos} />
+          <Edit todo={todo} setEdit={setEdit} editInput={editInput} setEditInput={setEditInput}/>
           :
           <p className={`task ${todo.completed ? "completed" : ""}`}>{ todo.task }</p>
         }

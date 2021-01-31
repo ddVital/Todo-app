@@ -47,25 +47,3 @@ const TodoList = ({ todos, setTodos }) => {
 }
 
 export default TodoList;
-
-// import React from 'react';
-// import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-// // importing components
-// import Todo from './Todo';
-
-// const TodoList = ({ todos, setTodos }) => {
-//   return (
-//     <div className="todos-container">
-//       {todos.map(todo => (
-//         <Todo 
-//           key={todo.id}
-//           setTodos={setTodos}
-//           todos={todos}
-//           todo={todo}
-//         />
-//       ))}
-//     </div>
-//   );
-// }
-
-// export default TodoList;

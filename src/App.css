@@ -58,9 +58,7 @@ select {
   color: #516395;
 }
 
-.filter {
-  margin: .5rem;  
-}
+.filter {margin: .5rem;}
 
 .filter-todo {padding: .8rem;}
 
@@ -115,13 +113,9 @@ select {
   color: #a5a5a5;
 }
 
-.edit-container {
-  width: 100%;
-}
+.edit-container {width: 100%;}
 
-.edit-todo {
-  width: 100%;
-}
+.edit-todo {width: 100%;}
 
 .edit {
   width: 92.5%;
