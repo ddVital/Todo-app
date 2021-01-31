@@ -28,7 +28,8 @@ const Todo = ({ todos, todo, setTodos }) => {
 
   return (
     <div className="todo" >
-      <div className='info'>
+      <div className= {`task ${edit ? 'edit-container' : 'info'}`}>
+
         {
           edit
           ?
@@ -37,18 +38,25 @@ const Todo = ({ todos, todo, setTodos }) => {
           <p className={`task ${todo.completed ? "completed" : ""}`}>{ todo.task }</p>
         }
         <p className="created-date">{todo.createdDate}</p>
+
       </div>
-      <div className="task-options">
-        <button className="complete-bnt" onClick={completeHandler}>
-          <i className="fas fa-check"></i>
-        </button>
-        <button className="edit-bnt" onClick={editTodo}>
-          <i className="fas fa-pen"></i>
-        </button>
-        <button className="trash-bnt" onClick={deleteHandler}>
-          <i className="fas fa-trash"></i>
-        </button>
-      </div>
+      {
+        edit
+        ?
+        ''
+        :
+        <div className="task-options">
+          <button className="complete-bnt" onClick={completeHandler}>
+            <i className="fas fa-check"></i>
+          </button>
+          <button className="edit-bnt" onClick={editTodo}>
+            <i className="fas fa-pen"></i>
+          </button>
+          <button className="trash-bnt" onClick={deleteHandler}>
+            <i className="fas fa-trash"></i>
+          </button>
+        </div>
+      }
     </div>    
   );
 }

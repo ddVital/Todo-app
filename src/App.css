@@ -17,11 +17,11 @@ header {
 }
 
 header,
-form {
+.todo-form {
   min-height: 15vh;
 }
 
-form {
+.todo-form {
   margin: 5%;
   display: flex;
   justify-content: center;
@@ -84,7 +84,10 @@ select {
 
 .todo p {margin: 0px;}
 
-.task {width: 80%;}
+.task {
+  font-size: 1rem;
+  width: 80%;
+}
 
 .created-date {
   color: gray;
@@ -104,12 +107,34 @@ select {
 
 .fas:hover {transition: all .6s ease;}
 .fa-check:hover {color: #00d600;}
-.fa-pen:hover {color: #614385;}
+.fa-pen:hover, .fa-save:hover {color: #614385;}
 .fa-trash:hover {color: #ff0000;}
 
 .completed {
   text-decoration: line-through;
   color: #a5a5a5;
+}
+
+.edit-container {
+  width: 100%;
+}
+
+.edit-todo {
+  width: 100%;
+}
+
+.edit {
+  width: 92.5%;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  border: none;
+  background: none;
+}
+
+.save-bnt {
+  font-size: 1.1rem;
+  background: none;
+  border: none;
 }
 
 @media only screen and (max-width: 600px) {

@@ -40,7 +40,7 @@ const Form = ({ inputText, setInputText, todos, setTodos, setStatus }) => {
   }
 
   return (
-    <form>
+    <form className="todo-form">
       <input type="text" className="task-input" placeholder="Add task" value={inputText} onChange={inputTextHandler} />
       <button type="submit" className="submit-bnt" onClick={submitTodoHandler} >
         <i className="fas fa-plus-circle"></i>
