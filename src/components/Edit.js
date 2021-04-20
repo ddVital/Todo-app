@@ -6,23 +6,28 @@ const Edit = ({ todo, setEdit, editInput, setEditInput }) => {
     setEditInput(e.target.value);
   }
   
-  const saveInput = () => {
-    var todos = JSON.parse(localStorage.getItem('todos'))    
-    todo.task = editInput;
+  const UpdateTodo = () => {
+    var todos = JSON.parse(localStorage.getItem('todos'))
 
-    todos.map((item, index) => {
-      if (item.id === todo.id) {
-        todos[index].task = editInput;
-        localStorage.setItem('todos',JSON.stringify(todos));
-      }
-    });
+    // if the user let the input empty it won't update the task
+    if (editInput.length > 0) { 
+      todo.task = editInput;
+
+      todos.map((item, index) => {
+        if (item.id === todo.id) {
+          todos[index].task = editInput;
+          return localStorage.setItem('todos', JSON.stringify(todos));
+        }
+      });
+    }
     setEdit(false);
   }
   
   return (
-    <form className="edit-todo">
-      <input type="text" className="edit" value={editInput} onChange={inputTextHandler} autoFocus />
-      <button onClick={saveInput} className="save-bnt">
+    <form className="edit">
+      <span className="created-date">{todo.createdDate.substring(0, 7)}</span>  
+      <input type="text" className="edit__input" value={editInput} onChange={inputTextHandler} autoFocus />
+      <button onClick={UpdateTodo} className="edit__btn">
         <i className="fas fa-save"></i>
       </button>
     </form>    

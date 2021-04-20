@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
-const Form = ({ inputText, setInputText, todos, setTodos, setStatus }) => {
+const Form = ({ inputText, setInputText, priority, setPriority, todos, setTodos, status, setStatus }) => {
 
-  const [id, setId] = useState(0);
+  const [id, setId] = useState(Math.floor(Math.random() * 10000));
+  const [DropdownOpen, setDropdownOpen] = useState(false);
 
   const inputTextHandler = (e) => {
     setInputText(e.target.value)
@@ -10,7 +11,9 @@ const Form = ({ inputText, setInputText, todos, setTodos, setStatus }) => {
 
   // give id
   const idProvider = () => {
-    setId(Math.floor(Math.random() * 10000));
+    const newId = Math.floor(Math.random() * 10000);
+
+    setId(newId);
   }
 
   const getCurrentTime = () => {
@@ -20,40 +23,107 @@ const Form = ({ inputText, setInputText, todos, setTodos, setStatus }) => {
   }
 
   const submitTodoHandler = (e) => {
-    idProvider()
+    idProvider();
 
     e.preventDefault();
     if (inputText.length <= 0) {
       alert("Please write something to add...");
-    } else if (inputText.length > 50) {
-      alert("Max length is 50");
+    } else if (inputText.length > 25) {
+      alert("Max length is 25");
     } else {
       setTodos([
-        ...todos, {task: inputText, completed: false, createdDate: getCurrentTime() , id: id.toString()},
+        ...todos, {
+          task: inputText,
+          priority: priority,
+          completed: false,
+          createdDate: getCurrentTime(),
+          id: id.toString()},
       ]);
     }
     setInputText("");
   }
 
-  const statusHandler = (e) => {
-    setStatus(e.target.value)
+  const statusHandler = (option) => {
+    setStatus(option);
+  }
+
+  const deleteAll = () => {
+    setTodos([])
+  }
+
+  const changeColor = (e) => {
+    e.preventDefault();
+  
+    const eleClass = e.target.className;
+
+    switch (true) {
+      case eleClass.includes('low'):
+        setPriority('medium');
+        break;
+    
+      case eleClass.includes('medium'):
+        setPriority('high');
+        break;
+
+      case eleClass.includes('high'):
+        setPriority('low');
+        break;
+      default:
+        break;
+    }
   }
 
   return (
-    <form className="todo-form">
-      <input type="text" className="task-input" placeholder="Add task" value={inputText} onChange={inputTextHandler} />
-      <button type="submit" className="submit-bnt" onClick={submitTodoHandler} >
-        <i className="fas fa-plus-circle"></i>
-      </button>
+    <div>
+      <form className="form">
+        <div className="form__box">
+          <button type="submit" className="submit-bnt" onClick={submitTodoHandler} >
+            <i className="fas fa-plus"></i>
+          </button>
+          <button className={`form__priority ${priority}`} onClick={changeColor}></button>
+          <input type="text" className="form__input" placeholder="Add task" value={inputText} onChange={inputTextHandler} />
+        </div>
+      </form>
 
-      <div className="filter">
-        <select name="todos" className="filter-todo" onChange={statusHandler}>
-          <option value="all">All</option>
-          <option value="completed">Completed</option>
-          <option value="uncompleted">Uncompleted</option>
-        </select>
-      </div>
-    </form>
+      <section className="filter-section">
+        <button className="delete-all" onClick={deleteAll}>Delete all tasks</button>
+
+        <DropdownSelect
+          statusHandler={statusHandler}
+          status={status}
+          DropdownOpen={DropdownOpen}
+          setDropdownOpen={setDropdownOpen}
+        />
+      </section>
+    </div>
+  );
+}
+
+function DropdownSelect({ status, statusHandler, DropdownOpen, setDropdownOpen }) {
+  const select = (option) => {
+    console.log(`hi the option clicked is ${option}`);
+    statusHandler(option);
+  }
+
+  return (
+    <div className={`select`}>
+      <header className="select__header" onClick={() => setDropdownOpen(!DropdownOpen)}>
+        <p className="select__title">{ status }</p>
+        <i className="fas fa-chevron-down"></i>
+      </header>
+
+      <ul className={`select__options ${DropdownOpen ? "show" : "hide"}`}>
+        <li className="select__option" onClick={() => select("all")}>
+          All
+        </li>
+        <li className="select__option" onClick={() => select("completed")}>
+          Completed
+        </li>
+        <li className="select__option" onClick={() => select("uncompleted")}>
+          Uncompleted
+        </li>
+      </ul>
+    </div>
   );
 }
 

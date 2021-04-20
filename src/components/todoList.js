@@ -23,18 +23,18 @@ const TodoList = ({ todos, setTodos }) => {
                 <div className="todos" {...provided.droppableProps} ref={provided.innerRef}>
                   {todos.map((todo, index) => {
                     return (
-                      <Draggable key={todo.id} draggableId={todo.id} index={index}>
-                        {(provided) => (
-                          <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                            <Todo 
-                              key={todo.id}
-                              setTodos={setTodos}
-                              todos={todos}
-                              todo={todo}
-                            />
-                          </div>
-                        )}
-                     </Draggable>
+                        <Draggable key={todo.id} draggableId={todo.id} index={index}>
+                          {(provided) => (
+                            <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                              <Todo
+                                key={todo.id}
+                                setTodos={setTodos}
+                                todos={todos}
+                                todo={todo}
+                              />
+                            </div>
+                          )}
+                      </Draggable>
                     );
                   })}
                 {provided.placeholder}

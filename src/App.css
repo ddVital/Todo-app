@@ -1,142 +1,275 @@
-* {outline: none;}
+:root {
+  --background-color: #2c2c2c;
+  --primary: white;
+  --secondary: #3a3a3a;
+  --third: #444444;
+
+  --completed: #7bd47b;
+  --priority-low: #ffff51;
+  --priority-medium: #ffbd41;
+  --priority-high: #ff5050;
+}
+
+* {
+  outline: none;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
-  background-image: linear-gradient(120deg, #614385 0%, #516395 100%);
-  color: white;
+  /* background: linear-gradient(-45deg, #ee7752, #f34e8d, #23a6d5, #2adab1); */
+	/* background-size: 400% 400%; */
+  background-color: var(--background-color);
+	animation: gradient 15s ease infinite;
   font-family: "Poppins", sans-serif;
   min-height: 100vh;
+  color: var(--primary);
 }
+
+input {font-family: "Poppins", sans-serif;}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+i {color: var(--primary);}
 
 .App {text-align: center;}
 
-header {
-  font-size: 3rem;
+.header {
+  font-size: .6rem;
+  padding: 10px;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 
-header,
-.todo-form {
-  min-height: 15vh;
-}
+.search {max-width: 50%;}
 
-.todo-form {
-  margin: 5%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+.search form {max-width: 100%;}
 
-.task-input,
-.submit-bnt {
+.search-box {
   border-radius: 50px;
-  padding: 0.7rem;
-  font-size: 1.2rem;
-  border: none;
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
-.task-input {width: 35%;}
+.search-box input {
+  padding: 6px 25px 6px 6px;
+  border-radius: 50px;
+  background-color: var(--secondary);
+  color: var(--primary);
+  border: none;
+  width: 100%;
+}
+
+.search-box button {
+  position: absolute;
+  right: 10px;
+}
+
+.form {
+  margin: auto;
+  width: 90%;
+  margin: 3rem auto .5rem auto;
+}
+
+.form__box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.form__box button {position: absolute;}
+
+.low {background-color: var(--priority-low);}
+.medium {background-color: var(--priority-medium);}
+.high {background-color: var(--priority-high);}
+
+.filter-section {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  width: 90%;
+  margin: auto;
+}
+
+.delete-all {color: var(--primary);}
+
+.form__priority {
+  left: 5px;
+  width: 1rem;
+  height: 1rem;
+  padding: 1rem;
+  border-radius: 50%;
+}
+
+.form__input {
+  border-radius: 50px;
+  padding: 0.7rem 0.7rem .7rem 3rem;
+  font-size: 1rem;
+  border: none;
+  width: 100%;
+  background-color: var(--secondary);
+  color: var(--primary);
+}
 
 .submit-bnt {
+  position: absolute;
+  right: 10px;
+  font-size: 1rem;
   background: none;
-  margin-left: -41px;
-  color: #614385;
+  color: var(--primary);
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.submit-bnt:hover {
-  background: #614385;
-  color: white;
+.todos {
+  margin: 3rem auto;
+  width: 90%;
 }
 
-select {
-  background-color: white;
-  border-radius: 50px;
-  border: none;
-  color: #516395;
+/* select  */
+.select {text-align: left;}
+
+.select__header {
+  width: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
-.filter {margin: .5rem;}
+.select__title {width: 130px;}
 
-.filter-todo {padding: .8rem;}
+.select__options {
+  background-color: var(--secondary);
 
-.todos {margin: auto;}
+  position: absolute;
+  z-index: 10;
+  border: 1px solid var(--third);
+  padding: 4px;
+  overflow: hidden;
+  display: none;
+  width: 40%;
+}
 
+.select__option {
+  padding: 4px;
+  cursor: pointer;
+  list-style: none;
+  border-bottom: 1px solid var(--third);
+}
+
+.select__option:last-child {border: 0;}
+
+/* todo */
 .todo {
-  background-color: #fff;
-  color: black;
-  margin: 1rem auto;
+  position: relative;
+  background-color: var(--secondary);
+  color: var(--primary);
+  margin: 1rem 0;
   text-align: left;
   list-style: none;
   padding: .5rem;
-  width: 45%;
-  border-radius: 8px;
+  width: 100%;
+  border-radius: 5px 10px 10px 5px;
+  display: flex;
+  align-items: center;
 }
 
-.info {
-  display: inline-block;
-  width: 80%;
+.todo::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0px;
+  width: 4px;
+  content: "";
+  border-radius: 10px 0 0 10px;
 }
 
-.todo p {margin: 0px;}
+.low::before {background-color: var(--priority-low);}
+.medium::before {background-color: var(--priority-medium);}
+.high::before {background-color: var(--priority-high);}
+.completed::before {background-color: var(--completed);}
 
-.task {
-  font-size: 1rem;
-  width: 80%;
+.info {width: 100%;}
+
+.task {}
+
+.task-options {
+  padding: 5px;
+  cursor: pointer;
 }
 
-.created-date {
-  color: gray;
-  font-size: .7rem;
-  width: 80%;
+.created-date {color: gray;}
+
+.options {
+  position: absolute;
+  right: 10px;
+  /* background: linear-gradient(-45deg, #ee7752, #f34e8d, #23a6d5, #2adab1); */
+  background-color: var(--secondary);
+  border: 1px solid var(--third);
+  border-radius: 10px;
+  width: 50%;
+  z-index: 10;
+  display: none;
+  overflow: hidden;
 }
 
-.task-options {float: right;}
+.show {display: block;}
 
-.complete-bnt,
-.edit-bnt,
-.trash-bnt {
-  font-size: 1.1rem;
-  background: none;
-  border: none;
+.options__item {
+  text-align: left;
+  padding: 10px;
+  width: 100%;
+  color: var(--primary);
+  border-bottom: 1px solid var(--third);
 }
 
-.fas:hover {transition: all .6s ease;}
-.fa-check:hover {color: #00d600;}
-.fa-pen:hover, .fa-save:hover {color: #614385;}
-.fa-trash:hover {color: #ff0000;}
+.options__item:last-child {border: 0;}
+
+.options__item:hover {
+  transition: all ease 1s;
+  background-color: var(--third);
+}
+
+.options__item i {
+  padding: 8px;
+  border-radius: 50%;
+  background-color: var(--third);
+}
 
 .completed {
-  text-decoration: line-through;
-  color: #a5a5a5;
+  background-color: #303030;
 }
 
-.edit-container {width: 100%;}
-
-.edit-todo {width: 100%;}
-
 .edit {
-  width: 92.5%;
-  font-family: "Poppins", sans-serif;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.edit__input {
+  width: 71%;
+  padding: 0 4px;
   font-size: 1rem;
   border: none;
   background: none;
+  color: var(--primary);
 }
 
-.save-bnt {
-  font-size: 1.1rem;
-  background: none;
-  border: none;
-}
+.edit__btn {font-size: 1.1rem;}
 
-@media only screen and (max-width: 600px) {
-  .task-input {width: 90%;}
+@media only screen and (min-width: 768px) {   
+  .form {width: 50%;}
 
-  .todo {width: 90%;}
+  .filter-section {width: 50%;}
 
-  .info {width: 70%;}
-  
-  .created-date {font-size: .7rem;}
+  .todos {width: 50%;}
+
+  .options {width: 30%;}
 }
