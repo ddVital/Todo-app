@@ -18,13 +18,28 @@
 }
 
 body {
-  /* background: linear-gradient(-45deg, #ee7752, #f34e8d, #23a6d5, #2adab1); */
-	/* background-size: 400% 400%; */
   background-color: var(--background-color);
 	animation: gradient 15s ease infinite;
   font-family: "Poppins", sans-serif;
   min-height: 100vh;
   color: var(--primary);
+}
+
+::-webkit-scrollbar {width: 8px;}
+::-webkit-scrollbar-track {background: var(--background-color);}
+
+::-webkit-scrollbar-thumb {
+  background: var(--third);
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {background: var(--secondary);}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance:none;
 }
 
 input {font-family: "Poppins", sans-serif;}
@@ -43,8 +58,14 @@ i {color: var(--primary);}
   font-size: .6rem;
   padding: 10px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+}
+
+.logo {
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: var(--primary);
 }
 
 .search {max-width: 50%;}
@@ -89,6 +110,7 @@ i {color: var(--primary);}
 .low {background-color: var(--priority-low);}
 .medium {background-color: var(--priority-medium);}
 .high {background-color: var(--priority-high);}
+.completed {background-color: var(--completed);}
 
 .filter-section {
   display: flex;
@@ -147,18 +169,16 @@ i {color: var(--primary);}
 
 .select__options {
   background-color: var(--secondary);
-
   position: absolute;
   z-index: 10;
   border: 1px solid var(--third);
-  padding: 4px;
+  padding: 0px;
   overflow: hidden;
-  display: none;
-  width: 40%;
+  width: 130px;
 }
 
 .select__option {
-  padding: 4px;
+  padding: 6px;
   cursor: pointer;
   list-style: none;
   border-bottom: 1px solid var(--third);
@@ -171,38 +191,30 @@ i {color: var(--primary);}
   position: relative;
   background-color: var(--secondary);
   color: var(--primary);
-  margin: 1rem 0;
   text-align: left;
   list-style: none;
   padding: .5rem;
   width: 100%;
-  border-radius: 5px 10px 10px 5px;
+  border-radius: 0px 10px 10px 0px;
   display: flex;
   align-items: center;
 }
 
-.todo::before {
+.priority {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0px;
-  width: 4px;
-  content: "";
-  border-radius: 10px 0 0 10px;
+  width: 6px;
+  cursor: pointer;
 }
-
-.low::before {background-color: var(--priority-low);}
-.medium::before {background-color: var(--priority-medium);}
-.high::before {background-color: var(--priority-high);}
-.completed::before {background-color: var(--completed);}
 
 .info {width: 100%;}
 
-.task {}
-
 .task-options {
-  padding: 5px;
+  display: flex;
   cursor: pointer;
+  padding: 6px;
 }
 
 .created-date {color: gray;}
@@ -210,11 +222,10 @@ i {color: var(--primary);}
 .options {
   position: absolute;
   right: 10px;
-  /* background: linear-gradient(-45deg, #ee7752, #f34e8d, #23a6d5, #2adab1); */
   background-color: var(--secondary);
   border: 1px solid var(--third);
   border-radius: 10px;
-  width: 50%;
+  width: 145px;
   z-index: 10;
   display: none;
   overflow: hidden;
@@ -239,22 +250,30 @@ i {color: var(--primary);}
 
 .options__item i {
   padding: 8px;
+  width: 25px;
+  height: 25px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 50%;
   background-color: var(--third);
 }
 
-.completed {
-  background-color: #303030;
-}
+.completed-todo {background-color: #303030;}
 
 .edit {
-  width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
+
+.edit div {width: 100%;}
+
+.edit__input {width: 70%;}
+
 .edit__input {
-  width: 71%;
+  width: 76%;
   padding: 0 4px;
   font-size: 1rem;
   border: none;
@@ -262,14 +281,35 @@ i {color: var(--primary);}
   color: var(--primary);
 }
 
-.edit__btn {font-size: 1.1rem;}
+.edit__btn {
+  font-size: 1.1rem;
+  display: flex;
+}
+
+.msg {
+  width: 90%;
+  margin: 5rem auto;
+  color: #adadad;
+}
 
 @media only screen and (min-width: 768px) {   
+  .header {justify-content: space-around;}
+
+  .logo {font-size: 2rem;}
+
+  .search {width: 25%;}
+
   .form {width: 50%;}
 
   .filter-section {width: 50%;}
 
   .todos {width: 50%;}
 
-  .options {width: 30%;}
+  .edit div {width: 100%;}
+
+  .msg {width: 50%;}
+
+  .edit__input {width: 70%;}
+  
+  .select__options {max-width: 130px;}
 }

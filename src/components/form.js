@@ -89,19 +89,20 @@ const Form = ({ inputText, setInputText, priority, setPriority, todos, setTodos,
         <button className="delete-all" onClick={deleteAll}>Delete all tasks</button>
 
         <DropdownSelect
-          statusHandler={statusHandler}
-          status={status}
-          DropdownOpen={DropdownOpen}
-          setDropdownOpen={setDropdownOpen}
-        />
+        statusHandler={statusHandler}
+        status={status}
+        DropdownOpen={DropdownOpen}
+        setDropdownOpen={setDropdownOpen}/>
       </section>
     </div>
   );
 }
 
 function DropdownSelect({ status, statusHandler, DropdownOpen, setDropdownOpen }) {
+  const closeDropdown = () => setDropdownOpen(!DropdownOpen);
+
   const select = (option) => {
-    console.log(`hi the option clicked is ${option}`);
+    closeDropdown()
     statusHandler(option);
   }
 
@@ -109,20 +110,26 @@ function DropdownSelect({ status, statusHandler, DropdownOpen, setDropdownOpen }
     <div className={`select`}>
       <header className="select__header" onClick={() => setDropdownOpen(!DropdownOpen)}>
         <p className="select__title">{ status }</p>
-        <i className="fas fa-chevron-down"></i>
+        <i className={`fas ${DropdownOpen ? 'fa-chevron-up' : 'fa-chevron-down'}`}></i>
       </header>
 
-      <ul className={`select__options ${DropdownOpen ? "show" : "hide"}`}>
-        <li className="select__option" onClick={() => select("all")}>
-          All
-        </li>
-        <li className="select__option" onClick={() => select("completed")}>
-          Completed
-        </li>
-        <li className="select__option" onClick={() => select("uncompleted")}>
-          Uncompleted
-        </li>
-      </ul>
+      {
+        DropdownOpen
+        ?
+        <ul className="select__options">
+          <li className="select__option" onClick={() => select("all")}>
+            All
+          </li>
+          <li className="select__option" onClick={() => select("completed")}>
+            Completed
+          </li>
+          <li className="select__option" onClick={() => select("uncompleted")}>
+            Uncompleted
+          </li>
+        </ul>
+        :
+        ''
+      }
     </div>
   );
 }

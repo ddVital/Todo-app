@@ -6,6 +6,7 @@ import Form from './components/Form';
 import TodoList from './components/TodoList';
 
 function App() {
+
   const [inputText, setInputText] = useState('');
   const [todos, setTodos] = useState([]);
   const [status, setStatus] = useState("all");
@@ -13,10 +14,8 @@ function App() {
   const [filteredTodos, setFilteredTodos] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
-
-  // RUN ONLY ONCE WHEN THE APP STARTS
   useEffect(() => {
-    getLocalTodos();
+    getLocalTodos(); // get todos from local storange
   }, [])
 
   useEffect(() => {
@@ -42,19 +41,6 @@ function App() {
     localStorage.setItem("todos", JSON.stringify(todos));
   }
 
-  const search = (task) => {
-    setFilteredTodos(todos.filter(todo => todo.task.includes(task)));  
-  }
-  
-  const updateSearch = e => {
-    setSearchQuery(e.target.value);
-  }
-
-  const getSearch = e => {
-    e.preventDefault();
-    search(searchQuery);
-  }
-
   const getLocalTodos = () => {
     if (localStorage.getItem('todos') === null ) {
       localStorage.setItem('todos', JSON.stringify([]));
@@ -67,19 +53,13 @@ function App() {
   return (
     <div className="App">
       <header className="header">
-        <h1>Todo App</h1>
+        <a href="/" className="logo">Todo App </a>
 
-        <section className="search">
-          <form onSubmit={getSearch}>
-            <div className="search-box">
-              <input type="text" placeholder="Search" className="" value={searchQuery} onChange={updateSearch} />
-              <button type='submit' className="search__btn">
-                <i className="fa fa-search"></i>
-              </button>
-            </div>
-          </form>
-        </section>
-
+        <Search
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          setFilteredTodos={setFilteredTodos}
+          todos={todos}/>
       </header>
 
       <section>
@@ -95,12 +75,35 @@ function App() {
       </section>
 
       <TodoList
-        todos={filteredTodos}
+        todos={todos}
+        filteredTodos={filteredTodos}
         setTodos={setTodos}
-        saveLocalTodos={saveLocalTodos}
-        priority={priority}
-        setPriority={setPriority}/>
+        search={searchQuery}/>
     </div>
+  );
+}
+
+function Search({ searchQuery, setSearchQuery, setFilteredTodos, todos }) {
+  useEffect(() => {
+    search();
+  }, [searchQuery]);
+
+  const search = () => {
+    if (searchQuery == '') setFilteredTodos(todos)
+    else setFilteredTodos(todos.filter(todo => todo.task.includes(searchQuery)));
+  }
+
+  return (
+    <section className="search">
+      <form>
+        <div className="search-box">
+          <input type="search" placeholder="Search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} autoComplete="off" maxLength="25" />
+          <button type='submit' className="search__btn" onClick={(e) => e.preventDefault()}>
+            <i className="fa fa-search"></i>
+          </button>
+        </div>
+      </form>
+    </section>
   );
 }
 
