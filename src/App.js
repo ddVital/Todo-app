@@ -23,6 +23,23 @@ function App() {
     saveLocalTodos();
   }, [todos, status])
 
+	useEffect(() => {
+    search();
+  }, [searchQuery]);
+
+  const saveLocalTodos = () => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }
+
+  const getLocalTodos = () => {
+    if (localStorage.getItem('todos') === null ) {
+      localStorage.setItem('todos', JSON.stringify([]));
+    } else {
+      let todoLocal = JSON.parse(localStorage.getItem("todos"));
+      setTodos(todoLocal);
+    }  
+  }
+
   const filterHandler = () => {
     switch(status) {
       case 'completed':
@@ -37,17 +54,9 @@ function App() {
     }
   }
 
-  const saveLocalTodos = () => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }
-
-  const getLocalTodos = () => {
-    if (localStorage.getItem('todos') === null ) {
-      localStorage.setItem('todos', JSON.stringify([]));
-    } else {
-      let todoLocal = JSON.parse(localStorage.getItem("todos"));
-      setTodos(todoLocal);
-    }  
+  const search = () => {
+    if (searchQuery == '') setFilteredTodos(todos)
+    else setFilteredTodos(todos.filter(todo => todo.task.includes(searchQuery)));
   }
   
   return (
@@ -55,11 +64,17 @@ function App() {
       <header className="header">
         <a href="/" className="logo">Todo App </a>
 
-        <Search
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          setFilteredTodos={setFilteredTodos}
-          todos={todos}/>
+
+        <section className="search">
+					<form>
+						<div className="search-box">
+							<input type="search" placeholder="Search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} autoComplete="off" maxLength="25" />
+							<button type='submit' className="search__btn" onClick={(e) => e.preventDefault()}>
+								<i className="fa fa-search"></i>
+							</button>
+						</div>
+					</form>
+				</section>
       </header>
 
       <section>
@@ -77,7 +92,9 @@ function App() {
       <TodoList
         todos={todos}
         filteredTodos={filteredTodos}
+        setFilteredTodos={setFilteredTodos}
         setTodos={setTodos}
+				status={status}
         search={searchQuery}/>
     </div>
   );

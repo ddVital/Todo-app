@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Edit = ({ todo, setEdit, editInput, setEditInput, priority }) => {
+const Edit = ({ todo, setEdit, priority }) => {
 
-  const inputTextHandler = (e) => {
-    setEditInput(e.target.value);
-  }
+  const [editInput, setEditInput] = useState(todo.task ? todo.task : ''); // the edited content
+
+  const inputTextHandler = (e) => setEditInput(e.target.value); // update the input value
   
   const UpdateTodo = () => {
-    var todos = JSON.parse(localStorage.getItem('todos'))
+    let todos = JSON.parse(localStorage.getItem('todos'))
 
-    // if the user let the input empty it won't update the task
-    if (editInput.length > 0) { 
+    // if the input is empty or greater than the max length it won't update the task
+    if (editInput.length > 0 && editInput.length < 25) { 
+      // set new values before refresh
       todo.task = editInput;
-      todo.priority = priority;
+      todo.priority = priority; 
 
+      // update the item in localstorange
       todos.map((item, index) => {
         if (item.id === todo.id) {
           todos[index].task = editInput;
@@ -22,6 +24,7 @@ const Edit = ({ todo, setEdit, editInput, setEditInput, priority }) => {
         }
       });
     }
+
     setEdit(false);
   }
   

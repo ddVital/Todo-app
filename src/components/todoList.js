@@ -1,9 +1,10 @@
 import React from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { setDefaultHandler } from 'workbox-routing';
 // importing components
 import Todo from './Todo';
 
-const TodoList = ({ todos, filteredTodos, setTodos, search }) => {
+const TodoList = ({ todos, setFilteredTodos, filteredTodos, setTodos, search, status }) => {
 
   function handleOnDragEnd(result) {
     if (!result.destination) return;
@@ -13,49 +14,36 @@ const TodoList = ({ todos, filteredTodos, setTodos, search }) => {
     items.splice(result.destination.index, 0, reorderedItem);
 
     setTodos(items);
+    setFilteredTodos(items);
   }
-    
-  const getItemStyle = draggableStyle => ({
-    // some basic styles to make the items look a bit nicer
-    userSelect: "none",
-    padding: "6px",
-    margin: `0 0 6px 0`,
 
-    // styles we need to apply on draggables
-    ...draggableStyle
-  });
-
-
+   
   return (
     <div>
       {
-        filteredTodos.length != 0
+        filteredTodos.length !== 0
         ?
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId='todos'>
             {provided => (
-                  <div className="todos" {...provided.droppableProps} ref={provided.innerRef}>
-                    {filteredTodos.map((todo, index) => {
-                      return (
-                        <Draggable key={todo.id} draggableId={todo.id} index={index} isDragDisabled={search ? true : false}>
-                          {provided => (
-                            <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
-                            style={getItemStyle(provided.draggableProps.style)}
-                            >
-                              <Todo
-                                key={todo.id}
-                                setTodos={setTodos}
-                                filteredTodos={filteredTodos}
-                                todos={todos}
-                                todo={todo}
-                                />
-                            </div>
-                          )}
-                        </Draggable>
-                      );
-                    })}
-                  {provided.placeholder}
-                </div>
+              <div className="todos" {...provided.droppableProps} ref={provided.innerRef}>
+                {filteredTodos.map((todo, index) => {
+                  return (
+                    <Draggable key={todo.id} draggableId={todo.id} index={index} isDragDisabled={search || status !== "all"? true : false}>
+                      {provided => (
+                        <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="draggableProps">
+                          <Todo
+                            key={todo.id}
+                            setTodos={setTodos}
+                            todos={todos}
+                            todo={todo}/>
+                        </div>
+                      )}
+                    </Draggable>
+                  );
+                })}
+                {provided.placeholder}
+              </div>
               )}
           </Droppable>
         </DragDropContext>
@@ -66,7 +54,7 @@ const TodoList = ({ todos, filteredTodos, setTodos, search }) => {
             ?
               `No results for: ${search}`
             :
-              "Any todo"
+              "Any todo available..."
           }
         </div>
       }

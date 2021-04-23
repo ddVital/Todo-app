@@ -3,18 +3,17 @@ import React, { useState } from 'react';
 // components
 import Edit from './Edit';
 
-const Todo = ({ todos, filteredTodos, todo, setTodos }) => {
+const Todo = ({ setTodos, todos, todo }) => {
   
   const [edit, setEdit] = useState(false);
-  const [editInput, setEditInput] = useState(todo.task ? todo.task : ''); // the edited content
-  const [openPopup, setOpenPopup] = useState(false);
+  const [open, setOpen] = useState(false);
   const [priority, setPriority] = useState(todo.priority);
 
-  const closeOptions = () => setOpenPopup(!openPopup);
+  const closeOpen = () => setOpen(!open);
 
   const deleteHandler = () => {
     setTodos(todos.filter((el) => el.id !== todo.id ))
-    closeOptions();
+    closeOpen();
   }
 
   const completeHandler = () => {
@@ -24,7 +23,7 @@ const Todo = ({ todos, filteredTodos, todo, setTodos }) => {
       return item;
     }));
 
-    closeOptions();
+    closeOpen();
   }
 
   const ShowPopup = () => {
@@ -35,13 +34,13 @@ const Todo = ({ todos, filteredTodos, todo, setTodos }) => {
       ele.className = "options hide";
     }
 
-    setOpenPopup(!openPopup);
+    setOpen(!open);
   }
 
   // show the edit component
   const editTodo = () => {
     setEdit(true);
-    closeOptions();
+    closeOpen();
   }
   
   const changeColor = (e) => {
@@ -77,8 +76,6 @@ const Todo = ({ todos, filteredTodos, todo, setTodos }) => {
               <Edit 
               todo={todo}
               setEdit={setEdit}
-              editInput={editInput}
-              setEditInput={setEditInput}
               priority={priority}/>
             </p>
           :
@@ -97,10 +94,10 @@ const Todo = ({ todos, filteredTodos, todo, setTodos }) => {
             </button>
 
           {
-            openPopup
+            open
             ?
             <OptionsPopup
-            openPopup={openPopup}
+            open={open}
             deleteHandler={deleteHandler}
             editTodo={editTodo}
             completeHandler={completeHandler}
@@ -114,9 +111,9 @@ const Todo = ({ todos, filteredTodos, todo, setTodos }) => {
   );
 }
 
-function OptionsPopup({ openPopup, deleteHandler, editTodo, todo, completeHandler }) {
+function OptionsPopup({ open, deleteHandler, editTodo, todo, completeHandler }) {
   return (
-    <div className={`options ${openPopup ? 'show' : 'hide'}`}>
+    <div className={`options ${open ? 'show' : 'hide'}`}>
       <button className="options__item" onClick={completeHandler}>
         <i className={`fas ${todo.completed ? "fa-times" : "fa-check"}`}></i> {todo.completed ? 'Uncomplete' : "Complete task"}
       </button>

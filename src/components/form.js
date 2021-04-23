@@ -3,18 +3,11 @@ import React, { useState } from 'react';
 const Form = ({ inputText, setInputText, priority, setPriority, todos, setTodos, status, setStatus }) => {
 
   const [id, setId] = useState(Math.floor(Math.random() * 10000));
-  const [DropdownOpen, setDropdownOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  const inputTextHandler = (e) => {
-    setInputText(e.target.value)
-  }
+  const inputTextHandler = (e) => setInputText(e.target.value);
 
-  // give id
-  const idProvider = () => {
-    const newId = Math.floor(Math.random() * 10000);
-
-    setId(newId);
-  }
+  const generateNewId = () => setId(Math.floor(Math.random() * 10000));
 
   const getCurrentTime = () => {
     const date = new Date();
@@ -23,7 +16,7 @@ const Form = ({ inputText, setInputText, priority, setPriority, todos, setTodos,
   }
 
   const submitTodoHandler = (e) => {
-    idProvider();
+    generateNewId();
 
     e.preventDefault();
     if (inputText.length <= 0) {
@@ -43,13 +36,9 @@ const Form = ({ inputText, setInputText, priority, setPriority, todos, setTodos,
     setInputText("");
   }
 
-  const statusHandler = (option) => {
-    setStatus(option);
-  }
+  const statusHandler = (option) => setStatus(option);
 
-  const deleteAll = () => {
-    setTodos([])
-  }
+  const deleteAll = () => setTodos([]);
 
   const changeColor = (e) => {
     e.preventDefault();
@@ -73,6 +62,13 @@ const Form = ({ inputText, setInputText, priority, setPriority, todos, setTodos,
     }
   }
 
+  const closeDropdown = () => setOpen(!open);
+
+  const select = (option) => {
+    closeDropdown();
+    statusHandler(option);
+  }
+
   return (
     <div>
       <form className="form">
@@ -88,48 +84,31 @@ const Form = ({ inputText, setInputText, priority, setPriority, todos, setTodos,
       <section className="filter-section">
         <button className="delete-all" onClick={deleteAll}>Delete all tasks</button>
 
-        <DropdownSelect
-        statusHandler={statusHandler}
-        status={status}
-        DropdownOpen={DropdownOpen}
-        setDropdownOpen={setDropdownOpen}/>
+        <div className={`select`}>
+          <header className="select__header" onClick={() => setOpen(!open)}>
+            <p className="select__title">{ status }</p>
+            <i className={`fas ${open ? 'fa-chevron-up' : 'fa-chevron-down'}`}></i>
+          </header>
+
+          {
+            open
+            ?
+            <ul className="select__options">
+              <li className="select__option" onClick={() => select("all")}>
+                All
+              </li>
+              <li className="select__option" onClick={() => select("completed")}>
+                Completed
+              </li>
+              <li className="select__option" onClick={() => select("uncompleted")}>
+                Uncompleted
+              </li>
+            </ul>
+            :
+            ''
+          }
+        </div>
       </section>
-    </div>
-  );
-}
-
-function DropdownSelect({ status, statusHandler, DropdownOpen, setDropdownOpen }) {
-  const closeDropdown = () => setDropdownOpen(!DropdownOpen);
-
-  const select = (option) => {
-    closeDropdown()
-    statusHandler(option);
-  }
-
-  return (
-    <div className={`select`}>
-      <header className="select__header" onClick={() => setDropdownOpen(!DropdownOpen)}>
-        <p className="select__title">{ status }</p>
-        <i className={`fas ${DropdownOpen ? 'fa-chevron-up' : 'fa-chevron-down'}`}></i>
-      </header>
-
-      {
-        DropdownOpen
-        ?
-        <ul className="select__options">
-          <li className="select__option" onClick={() => select("all")}>
-            All
-          </li>
-          <li className="select__option" onClick={() => select("completed")}>
-            Completed
-          </li>
-          <li className="select__option" onClick={() => select("uncompleted")}>
-            Uncompleted
-          </li>
-        </ul>
-        :
-        ''
-      }
     </div>
   );
 }
