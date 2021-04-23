@@ -55,15 +55,14 @@ function App() {
   }
 
   const search = () => {
-    if (searchQuery == '') setFilteredTodos(todos)
-    else setFilteredTodos(todos.filter(todo => todo.task.includes(searchQuery)));
+    if (searchQuery == '') setFilteredTodos(todos);
+    else setFilteredTodos(todos.filter(todo => todo.task.toLowerCase().includes(searchQuery.toLowerCase())));
   }
   
   return (
     <div className="App">
       <header className="header">
         <a href="/" className="logo">Todo App </a>
-
 
         <section className="search">
 					<form>

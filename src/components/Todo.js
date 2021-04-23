@@ -5,9 +5,9 @@ import Edit from './Edit';
 
 const Todo = ({ setTodos, todos, todo }) => {
   
-  const [edit, setEdit] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [priority, setPriority] = useState(todo.priority);
+  const [edit, setEdit] = useState(false); // change the content for the edit input
+  const [open, setOpen] = useState(false); // open the todo options (delete, edit, complete...)
+  const [priority, setPriority] = useState(todo.priority); // priority color
 
   const closeOpen = () => setOpen(!open);
 
@@ -96,34 +96,23 @@ const Todo = ({ setTodos, todos, todo }) => {
           {
             open
             ?
-            <OptionsPopup
-            open={open}
-            deleteHandler={deleteHandler}
-            editTodo={editTodo}
-            completeHandler={completeHandler}
-            todo={todo}/>
+              <div className={`options ${open ? 'show' : 'hide'}`}>
+                <button className="options__item" onClick={completeHandler}>
+                  <i className={`fas ${todo.completed ? "fa-times" : "fa-check"}`}></i> {todo.completed ? 'Uncomplete' : "Complete task"}
+                </button>
+                <button className="options__item" onClick={editTodo}>
+                  <i className="fas fa-pen"></i> Edit task
+                </button>
+                <button className="options__item" onClick={deleteHandler}>
+                  <i className="fas fa-trash"></i> Delete task
+                </button>
+              </div>
             :
             ''
           }
         </div>
       }
     </div>    
-  );
-}
-
-function OptionsPopup({ open, deleteHandler, editTodo, todo, completeHandler }) {
-  return (
-    <div className={`options ${open ? 'show' : 'hide'}`}>
-      <button className="options__item" onClick={completeHandler}>
-        <i className={`fas ${todo.completed ? "fa-times" : "fa-check"}`}></i> {todo.completed ? 'Uncomplete' : "Complete task"}
-      </button>
-      <button className="options__item" onClick={editTodo}>
-        <i className="fas fa-pen"></i> Edit task
-      </button>
-      <button className="options__item" onClick={deleteHandler}>
-        <i className="fas fa-trash"></i> Delete task
-      </button>
-    </div>
   );
 }
 
