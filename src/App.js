@@ -62,13 +62,15 @@ function App() {
   return (
     <div className="App">
       <header className="header">
+				<h1>
         <a href="/" className="logo">Todo App </a>
+				</h1>
 
         <section className="search">
 					<form>
 						<div className="search-box">
 							<input type="search" placeholder="Search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} autoComplete="off" maxLength="25" />
-							<button type='submit' className="search__btn" onClick={(e) => e.preventDefault()}>
+							<button type='submit' aria-label="Search" className="search__btn" onClick={(e) => e.preventDefault()}>
 								<i className="fa fa-search"></i>
 							</button>
 						</div>
@@ -96,30 +98,6 @@ function App() {
 				status={status}
         search={searchQuery}/>
     </div>
-  );
-}
-
-function Search({ searchQuery, setSearchQuery, setFilteredTodos, todos }) {
-  useEffect(() => {
-    search();
-  }, [searchQuery]);
-
-  const search = () => {
-    if (searchQuery == '') setFilteredTodos(todos)
-    else setFilteredTodos(todos.filter(todo => todo.task.includes(searchQuery)));
-  }
-
-  return (
-    <section className="search">
-      <form>
-        <div className="search-box">
-          <input type="search" placeholder="Search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} autoComplete="off" maxLength="25" />
-          <button type='submit' className="search__btn" onClick={(e) => e.preventDefault()}>
-            <i className="fa fa-search"></i>
-          </button>
-        </div>
-      </form>
-    </section>
   );
 }
 

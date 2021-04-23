@@ -89,7 +89,7 @@ const Todo = ({ setTodos, todos, todo }) => {
         ''
         :
         <div className="right">
-            <button className="task-options" onClick={ShowPopup}>
+            <button aria-label="task options" className="task-options" onClick={ShowPopup}>
               <i className="fas fa-ellipsis-v"></i>
             </button>
 
@@ -97,13 +97,13 @@ const Todo = ({ setTodos, todos, todo }) => {
             open
             ?
               <div className={`options ${open ? 'show' : 'hide'}`}>
-                <button className="options__item" onClick={completeHandler}>
+                <button aria-label="Complete task" className="options__item" onClick={completeHandler}>
                   <i className={`fas ${todo.completed ? "fa-times" : "fa-check"}`}></i> {todo.completed ? 'Uncomplete' : "Complete task"}
                 </button>
-                <button className="options__item" onClick={editTodo}>
+                <button aria-label="Edit task" className="options__item" onClick={editTodo}>
                   <i className="fas fa-pen"></i> Edit task
                 </button>
-                <button className="options__item" onClick={deleteHandler}>
+                <button aria-label="Delete task" className="options__item" onClick={deleteHandler}>
                   <i className="fas fa-trash"></i> Delete task
                 </button>
               </div>

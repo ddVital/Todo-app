@@ -73,16 +73,16 @@ const Form = ({ inputText, setInputText, priority, setPriority, todos, setTodos,
     <div>
       <form className="form">
         <div className="form__box">
-          <button type="submit" className="submit-bnt" onClick={submitTodoHandler} >
+          <button aria-label="Add new task" type="submit" className="submit-bnt" onClick={submitTodoHandler} >
             <i className="fas fa-plus"></i>
           </button>
-          <button className={`form__priority ${priority}`} onClick={changeColor}></button>
+          <button aria-label="Change color" className={`form__priority ${priority}`} onClick={changeColor}></button>
           <input type="text" className="form__input" placeholder="Add task" value={inputText} onChange={inputTextHandler} />
         </div>
       </form>
 
       <section className="filter-section">
-        <button className="delete-all" onClick={deleteAll}>Delete all tasks</button>
+        <button aria-label="Delete all tasks" className="delete-all" onClick={deleteAll}>Delete all tasks</button>
 
         <div className={`select`}>
           <header className="select__header" onClick={() => setOpen(!open)}>
@@ -93,14 +93,14 @@ const Form = ({ inputText, setInputText, priority, setPriority, todos, setTodos,
           {
             open
             ?
-            <ul className="select__options">
-              <li className="select__option" onClick={() => select("all")}>
+            <ul className="select__options" role="select">
+              <li className="select__option" aria-selected={status === "all" ? true : false} onClick={() => select("all")}>
                 All
               </li>
-              <li className="select__option" onClick={() => select("completed")}>
+              <li className="select__option" aria-selected={status === "completed" ? true : false} onClick={() => select("completed")}>
                 Completed
               </li>
-              <li className="select__option" onClick={() => select("uncompleted")}>
+              <li className="select__option" aria-selected={status === "uncompleted" ? true : false} onClick={() => select("uncompleted")}>
                 Uncompleted
               </li>
             </ul>
